@@ -90,8 +90,8 @@ export async function getCaseStudies(limit = 10): Promise<CaseStudy[]> {
   }
 }
 
-/** Build Directus asset URL (use NEXT_PUBLIC_DIRECTUS_URL for client) */
 export function assetUrl(id: string | null | undefined): string {
-  if (!id || !DIRECTUS_URL) return "";
-  return `${DIRECTUS_URL}/assets/${id}`;
+  if (!id) return "";
+  // Proxy assets through Next.js so we can attach Directus auth server-side.
+  return `/api/directus-assets/${id}`;
 }
