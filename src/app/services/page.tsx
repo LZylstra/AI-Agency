@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getServices } from "@/lib/directus";
-import { assetUrl } from "@/lib/directus";
+import { GeneratedIcon } from "@/components/GeneratedIcon";
 
 export default async function ServicesPage() {
   const services = await getServices();
@@ -23,17 +22,9 @@ export default async function ServicesPage() {
             href={`/services/${s.slug}`}
             className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-8 shadow-sm transition-all hover:border-[var(--accent)]/30 hover:shadow-md"
           >
-            {s.icon && assetUrl(s.icon) && (
-              <div className="relative mb-5 h-14 w-14 overflow-hidden rounded-xl bg-slate-100">
-                <Image
-                  src={assetUrl(s.icon)!}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="56px"
-                />
-              </div>
-            )}
+            <div className="relative mb-5 h-14 w-14">
+              <GeneratedIcon seed={s.id} label={s.name} className="h-14 w-14" />
+            </div>
             <h2 className="text-2xl font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
               {s.name}
             </h2>

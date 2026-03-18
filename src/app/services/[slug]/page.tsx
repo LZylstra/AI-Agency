@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { getServiceBySlug } from "@/lib/directus";
-import { assetUrl } from "@/lib/directus";
+import { GeneratedIcon } from "@/components/GeneratedIcon";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -26,17 +25,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </Link>
 
       <header className="mb-12">
-        {service.icon && assetUrl(service.icon) && (
-          <div className="relative mb-6 h-16 w-16 overflow-hidden rounded-2xl bg-slate-100">
-            <Image
-              src={assetUrl(service.icon)!}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="64px"
-            />
-          </div>
-        )}
+        <div className="relative mb-6 h-16 w-16">
+          <GeneratedIcon seed={service.id} label={service.name} className="h-16 w-16" />
+        </div>
         <h1 className="text-4xl font-bold tracking-tight text-[var(--foreground)]">
           {service.name}
         </h1>

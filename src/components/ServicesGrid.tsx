@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Service } from "@/types/directus";
-import { assetUrl } from "@/lib/directus";
+import { GeneratedIcon } from "@/components/GeneratedIcon";
 
 interface ServicesGridProps {
   services: Service[];
@@ -29,17 +28,13 @@ export function ServicesGrid({ services, columns = 3 }: ServicesGridProps) {
               href={`/services/${s.slug}`}
               className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition-all hover:border-[var(--accent)]/30 hover:shadow-md"
             >
-              {s.icon && assetUrl(s.icon) && (
-                <div className="relative mb-4 h-12 w-12 overflow-hidden rounded-xl bg-slate-100">
-                  <Image
-                    src={assetUrl(s.icon)!}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="48px"
-                  />
-                </div>
-              )}
+              <div className="relative mb-4 h-12 w-12">
+                <GeneratedIcon
+                  seed={s.id}
+                  label={s.name}
+                  className="h-12 w-12"
+                />
+              </div>
               <h3 className="text-xl font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
                 {s.name}
               </h3>
